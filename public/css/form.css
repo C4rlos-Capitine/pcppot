@@ -1,0 +1,24 @@
+fieldset {
+    background-color: #edeee7;
+
+    gap: 10px;
+    margin: 20px !important;
+    border: 1 px solid #ccc;	
+    border-radius: 2px 2px 2px 2px;
+    padding: 20px !important;
+}
+.btn{
+    margin-top: 10px;
+    background-color: green !important;
+}
+
+.action{
+    margin-top: 10px;
+    background-color: green !important;
+}
+
+input[type="text"]{
+    margin-left: 5px !important;
+}
+
+
