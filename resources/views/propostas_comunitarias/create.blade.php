@@ -204,7 +204,7 @@
 
                             <!-- Bairro -->
                             <div class="col-auto">
-                                <label for="id_bairro" class="form-label">Bairro/Município</label>
+                                <label for="id_bairro" class="form-label">Bairro/</label>
                                 <select class="form-select" id="id_bairro" name="id_bairro" required>
                                     <option value="" disabled selected>Selecione o bairro</option>
                                     @foreach ($bairros as $bairro)
@@ -251,9 +251,7 @@
                 </form>
             </div>
 	</main>
-		<footer>
-		<p>Email: carlos.capitine@outlook.com | WhatsApp: +258 842976341</p>
-	</footer>
+@include('footer')
 	<div class="modal fade bd-example-modal-lg" id="modal-edit-senha" tabindex="1" style="z-index:9999" role="dialog" aria-labelledby="myLargeModalLabel" padding="15px" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

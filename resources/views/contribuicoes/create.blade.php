@@ -7,7 +7,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-<script type="text/javascript" src="jquery-3.7.0.js"></script>
+<script type="text/javascript" src="{{asset('jquery-3.7.0.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
 <link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
@@ -205,12 +205,6 @@
                                 <input type="text" class="form-control" id="assunto" name="assunto" maxlength="255" required>
                             </div>
 
-                            <!-- Mensagem -->
-                            <div class="form-group">
-                                <label for="mensagem" class="form-label">Mensagem Detalhada</label>
-                                <textarea class="form-control" id="mensagem" name="mensagem" rows="3" required></textarea>
-                            </div>
-
                             <!-- Plano ou Projeto -->
                             <div class="col-auto">
                                 <label for="id_plano" class="form-label">Plano ou Projeto (opcional)</label>
@@ -244,7 +238,12 @@
                             <div class="col-auto">
                                 <label for="anexo" class="form-label">Anexo (opcional)</label>
                                 <input type="file" class="form-control" id="anexo" name="anexo" accept=".pdf, .doc, .docx, .jpg, .png">
+                            </div>         <!-- Mensagem -->
+                            <div class="form-group">
+                                <label for="mensagem" class="form-label">Mensagem Detalhada</label>
+                                <textarea class="form-control" id="mensagem" name="mensagem" rows="3" required></textarea>
                             </div>
+
                         </div>
 
                         <!-- Botão de envio -->
@@ -253,9 +252,7 @@
                 </form>
             </div>
 	</main>
-		<footer>
-		<p>Email: carlos.capitine@outlook.com | WhatsApp: +258 842976341</p>
-	</footer>
+@include('footer')
 	<div class="modal fade bd-example-modal-lg" id="modal-edit-senha" tabindex="1" style="z-index:9999" role="dialog" aria-labelledby="myLargeModalLabel" padding="15px" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

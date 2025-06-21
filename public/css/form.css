@@ -1,6 +1,6 @@
 fieldset {
     background-color: #edeee7;
-
+    
     gap: 10px;
     margin: 20px !important;
     border: 1 px solid #ccc;	
@@ -19,6 +19,19 @@ fieldset {
 
 input[type="text"]{
     margin-left: 5px !important;
+}
+
+form {
+    border-radius: 20px 20px;
+    padding: 5.0 rem !important;
+}
+
+header{
+    z-index: 1000;
+}
+
+textarea{
+    margin: 5px !important;
 }
 
 

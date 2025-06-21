@@ -182,16 +182,10 @@
 				<img  class ="img_card"  src="terras2.jpg" alt="Imagem 1">
 				<p><a href="/docs">Consultar Planos/programas/projectos</a></p>
 			</div>
-			<div class="card">
-				<img  class ="img_card" src="documentos.jpg" alt="Imagem 2">
-				<p>Documentos</p>
-			</div>
 		</div>
 
 	</main>
-		<footer>
-		<p>Email: carlos.capitine@outlook.com | WhatsApp: +258 842976341</p>
-	</footer>
+@include('footer')
 	<div class="modal fade bd-example-modal-lg" id="modal-edit-senha" tabindex="1" style="z-index:9999" role="dialog" aria-labelledby="myLargeModalLabel" padding="15px" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

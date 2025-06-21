@@ -6,6 +6,7 @@ use App\Models\ConsultaPublica;
 use App\Models\Bairro;
 use App\Models\Plano;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ConsultaPublicaController extends Controller
 {
@@ -18,6 +19,7 @@ class ConsultaPublicaController extends Controller
     public function create()
     {
         $bairros = Bairro::all();
+        
         $planos = Plano::all();
         return view('consultas_publicas.create', compact('bairros', 'planos'));
        // return view('consultas_publicas.create');
@@ -26,10 +28,14 @@ class ConsultaPublicaController extends Controller
     public function public_create($id_plano)
     {
         $plano = Plano::findOrFail($id_plano);
-
-        $bairros = Bairro::all();
+        $distrito = DB::table('distritos')
+            ->where('id_distrito', $plano->id_distrito)
+            ->first();
+        $bairros = DB::table('bairros')
+            ->where('id_distrito', $plano->id_distrito)
+            ->get();
         //$planos = Plano::all();
-        return view('consultas_publicas.public_create', compact('bairros', 'plano'));
+        return view('consultas_publicas.public_create', compact('bairros', 'plano', 'distrito'));
        // return view('consultas_publicas.create');
     }
 
