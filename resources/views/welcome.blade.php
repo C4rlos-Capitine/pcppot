@@ -56,7 +56,7 @@
 		.main-img{
 			position: relative;
 			width: 100%;
-			height: 18rem;
+			height: 22rem;
 			background-color: violet;
 			padding: 2rem;
 			z-index: -999;
@@ -66,7 +66,7 @@
 			background-position: center;
 			background-repeat: no-repeat;
 		}
-		.main-img h2{
+		.main-img h3{
 			width: 50%;
 			top: 5%;
 			position: relative;
@@ -187,9 +187,10 @@
    @include('header_public')
 	<main>
 		<section class="main-img">
-			<h2>
+			<h3 style="font-weight: 700; color: #0b8e12;">Bem-vindo à</h3>
+			<h3 style="font-weight: 700; color: #0b8e12;">
 				Plataforma de Consulta Pública para Planos de Ordenamento Territorial
-			</h2>
+			</h3>
 		</section>
 		<section class="info-section">
 			<p>A criação de uma Plataforma de Consulta Pública para Planos de Ordenamento Territorial em Moçambique, especificamente no município de Maputo é justificada pelos princípios do Artigo 9 do Regulamento da Lei de Ordenamento do Território, que garante a participação pública em todas as fases dos processos de ordenamento. <br> <br>A plataforma visa facilitar o envolvimento dos cidadãos, proporcionando um meio digital acessível para envio de sugestões, realização de consultas e audiências públicas, além de assegurar a descentralização dessas atividades, promovendo a inclusão de comunidades rurais e periféricas. Além disso, ela cumpre os requisitos legais de transparência e responsabilização ao disponibilizar informações e justificar as decisões tomadas pelas autoridades. Ao digitalizar o processo, a plataforma também moderniza e democratiza o acesso, permitindo que mais cidadãos participem de forma ativa e informada no planeamento urbano do país.</p>
