@@ -199,7 +199,7 @@
 		<div class="row">
 			<div class="card">
 				<img  class ="img_card"src="people.jpg"  alt="Imagem 1">
-				<p><a href="/contribuicoes/create">Sugestões/Reclamações</a></p>
+				<p><a href="{{url('/contribuicoes/create')}}">Sugestões/Reclamações</a></p>
 			</div>
 			<div class="card">
 				<img class ="img_card" src="people2.jpg" alt="Imagem 2">
@@ -207,11 +207,11 @@
 			</div>
 			<div class="card">
 				<img class ="img_card" src="people2.jpg" alt="Imagem 2">
-				<p><a href="/propostas_comunitarias/create">Propostas Comunitárias</a></p>
+				<p><a href="{{url('/propostas_comunitarias/create')}}">Propostas Comunitárias</a></p>
 			</div>
 				<div class="card">
 				<img  class ="img_card"  src="terras2.jpg" alt="Imagem 1">
-				<p><a href="/docs">Consultar Planos/programas/projectos</a></p>
+				<p><a href="{{url('/docs')}}">Consultar Planos/programas/projectos</a></p>
 			</div>
 		</div>
 
