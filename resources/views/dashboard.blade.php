@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<style>
+  canvas{
+    margin: 20px;
+  }
+</style>
 <html lang="en">
     @include('head')
     <body>
@@ -90,6 +95,12 @@
   
 
   <div class="row">
+  <div class="col-6">
+    <canvas id="myChart"></canvas>
+  </div>
+  <div class="col-6">
+    <canvas id="myChart2"></canvas>
+  </div>
 
   </div>
 </section>
@@ -101,5 +112,52 @@
 </html>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+    const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: ['Planos', 'Programas', 'Projectos', 'Propostas Comunitarias'],
+      datasets: [{
+        label: '# Gráficos',
+        data: [{{$count_planos}}, {{$count_programas}}, {{$count_projectos}}, {{$cout_propostas}}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>

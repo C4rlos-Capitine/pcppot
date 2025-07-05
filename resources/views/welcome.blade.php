@@ -19,18 +19,18 @@
 
 	<title>PCPPO</title>
 	<style>
-		body {
+			body {
 			justify-content: center;
 			margin: 0;
 			width: 100%;
 			/*height: 100%;*/
 			font-family: Arial, sans-serif;
 		}
-
+		
 		header {
 			margin-right: 20px;
 			background-color: #E8F5E9;
-		padding-right: 0.7rem;
+			padding-right: 0.7rem;
 			text-align: initial;
 			width: 100%;
 			display: flex;
@@ -49,11 +49,35 @@
 			font-size: 18px;
 		}
 		main{
-			margin-top: 3.0rem;
+			margin-top: 4rem;
 			justify-content: center;
+			position: relative;
 			height: 100%;
-			padding: 30px;
+			/* padding: 30px; */
 			text-align: center;
+		}
+		.main-img{
+			position: relative;
+			width: 100%;
+			height: 18rem;
+			background-color: violet;
+			padding: 2rem;
+			z-index: -999;
+			margin-bottom: 2rem;
+			background-image: url("{{asset('mapa.png')}}");
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+		.main-img h2{
+			width: 50%;
+			top: 5%;
+			position: relative;
+			text-align: left;
+			margin-left: 15%;
+			font-weight: 700;
+			color: #0b8e12;
+			
 		}
 		.btn{
 			height: fit-content;
@@ -72,7 +96,7 @@
 		}
 
 		.card {
-			width: 300px;
+			width: 200px;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -95,7 +119,7 @@
 		.card p {
 			margin: 10px 0;
 			padding: 10px;
-			font-size: 16px;
+			font-size: 14px;
 			color: #333;
 		}
 		footer {
@@ -114,10 +138,10 @@
 		.info-section{
 			/*background-color: #FFF176;*/
 			margin: auto;
-			width: 90%;
+			width: 70%;
 			padding: 2.2rem;
 			border-radius: 20px;
-			border: 2px solid #E8F5E9;
+			border: solid 1px #4CAF50;
 			p{
 				color: #2E7D32;
 				text-align: justify;
@@ -160,8 +184,13 @@
 <body>
    @include('header_public')
 	<main>
+		<section class="main-img">
+			<h2>
+				Plataforma de Consulta Pública para Planos de Ordenamento Territorial
+			</h2>
+		</section>
 		<section class="info-section">
-			<p>A criação de uma Plataforma de Consulta Pública para Planos de Ordenamento Territorial em Moçambique, especificamente no município de Maputo é justificada pelos princípios do Artigo 9 do Regulamento da Lei de Ordenamento do Território, que garante a participação pública em todas as fases dos processos de ordenamento. A plataforma visa facilitar o envolvimento dos cidadãos, proporcionando um meio digital acessível para envio de sugestões, realização de consultas e audiências públicas, além de assegurar a descentralização dessas atividades, promovendo a inclusão de comunidades rurais e periféricas. Além disso, ela cumpre os requisitos legais de transparência e responsabilização ao disponibilizar informações e justificar as decisões tomadas pelas autoridades. Ao digitalizar o processo, a plataforma também moderniza e democratiza o acesso, permitindo que mais cidadãos participem de forma ativa e informada no planeamento urbano do país.</p>
+			<p>A criação de uma Plataforma de Consulta Pública para Planos de Ordenamento Territorial em Moçambique, especificamente no município de Maputo é justificada pelos princípios do Artigo 9 do Regulamento da Lei de Ordenamento do Território, que garante a participação pública em todas as fases dos processos de ordenamento. <br> <br>A plataforma visa facilitar o envolvimento dos cidadãos, proporcionando um meio digital acessível para envio de sugestões, realização de consultas e audiências públicas, além de assegurar a descentralização dessas atividades, promovendo a inclusão de comunidades rurais e periféricas. Além disso, ela cumpre os requisitos legais de transparência e responsabilização ao disponibilizar informações e justificar as decisões tomadas pelas autoridades. Ao digitalizar o processo, a plataforma também moderniza e democratiza o acesso, permitindo que mais cidadãos participem de forma ativa e informada no planeamento urbano do país.</p>
 			<p>
 	
 		</section>

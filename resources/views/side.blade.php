@@ -18,6 +18,9 @@
     .list-group-flush .list-group-item {
         padding: 25px !important;
     }
+    .list-group-item-action:hover {
+        background-color: #C5E1A5!important;
+    }
 
 </style>
 
