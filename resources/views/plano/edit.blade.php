@@ -30,7 +30,7 @@
                 <!-- Formulário para edição de planos -->
                 <form class="formulario" action="{{ route('plano.update', $plano->id_plano) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('POST') <!-- Método PUT para atualização -->
+                    @method('PUT')<!-- Método PUT para atualização -->
                     <fieldset>
                         <h3>Editar Plano</h3>
                         <p>Atualize os campos abaixo para editar o plano.</p>

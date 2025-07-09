@@ -206,30 +206,23 @@ body {
 		<div class="section-div"><h4>Projectos/Planos/Programas para Auscultação</h4></div>
 
 		<section class="post-section">
-    @foreach ($planos as $plano)
-        <div class="post">
-            <div class="img-post">
-                <img id="{{ $plano->id_plano }}" class="imagem" onclick="carregarDocumentos(this.id)" src="pdf.jpg">
-            </div>
-            <div class="inf-post">
-                <h2>{{ $plano->nome_plano }}</h2>
-                <label>Plano de {{ $plano->descricao_plano }}</label>
-                <div class="content" id="content-{{ $plano->id_plano }}">
-                    <label>
+        @foreach ($planos as $plano)
+            <div class="card mb-3" style="width: 22rem; display: inline-block; margin: 10px; vertical-align: top;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $plano->nome_plano }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted"></h6>
+                    <p class="card-text">
                         <strong>Data de Início:</strong> {{ $plano->data_inicio }}<br>
                         <strong>Data de Fim:</strong> {{ $plano->data_fim }}<br>
-                        <strong>Área Abrangida:</strong> {{ $plano->area_abrangida }} km²<br>
-                        <strong>Objectivos:</strong> {{ $plano->objectivos }}
-                        <strong><a href="{{ url('/plano/download_doc/' . $plano->id_plano) }}">Baixar o documento</a></strong></br>
-                        <strong><a href="{{ route('consultas_publicas.public_create', ['id_plano' => $plano->id_plano]) }}">Consultar plano</a></strong>
-                    </label>
+                        <strong>Consultas {{ $plano->consultas_publicas_count }}</strong></br>
+                        <a class="btn btn-primary" id="{{ $plano->id_plano }}" href="{{ route('plano.details', $plano->id_plano) }}">Detalhes</a>
+                    </p>
+                    <a href="{{ url('/plano/download_doc/' . $plano->id_plano) }}" class="card-link">Baixar o documento</a>
+                    <a href="{{ route('consultas_publicas.public_create', ['id_plano' => $plano->id_plano]) }}" class="card-link">Consultar plano</a>
+                    <a href="javascript:void(0);" onclick="carregarDocumentos({{ $plano->id_plano }})" class="card-link">Ver documentos</a>
                 </div>
             </div>
-            <button class="btn btn-primary download-doc collapsible" id="{{ $plano->id_plano }}" type="button" data-bs-toggle="collapse" data-bs-target="#content-{{ $plano->id_plano }}" aria-expanded="false" aria-controls="content-{{ $plano->id_plano }}">
-                Detalhes
-            </button>
-        </div>
-    @endforeach
+        @endforeach
 
 	</main>
     <div class="modal fade bd-example-modal-lg" id="modal-edit-senha" tabindex="1" style="z-index:9999" role="dialog" aria-labelledby="myLargeModalLabel" padding="15px" aria-hidden="true">
@@ -268,12 +261,15 @@ body {
         </div>
     </div>
 </div>
+
+
 @include('footer')
 </body>
 <script>
-    	    function show_Form(){
-        $('.modal').modal('show');
+    function show_Form(){
+        $('#modal-edit-senha').modal('show');
     }
+    
     window.onscroll = function() {myFunction()};
     
     var navbar = document.querySelector("header");

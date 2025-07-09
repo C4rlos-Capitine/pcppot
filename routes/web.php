@@ -29,8 +29,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/docs', function () {
-    $planos = \App\Models\Plano::all();
+    // Busca todos os planos e já traz o total de consultas públicas relacionadas a cada um
+    $planos = \App\Models\Plano::withCount('consultasPublicas')->get();
     return view('publico_doc', ['planos' => $planos]);
 });
 
@@ -54,8 +56,11 @@ Route::get('/docs/download/{id_documento}', function ($id_documento) {
 
 
 Route::resource('contribuicoes', ContribuicaoController::class);
-    Route::resource('propostas_comunitarias', PropostaComunitariaController::class);
-    Route::resource('eventos_participacao_publica', EventoParticipacaoPublicaController::class);
+Route::resource('propostas_comunitarias', PropostaComunitariaController::class);
+Route::resource('eventos_participacao_publica', EventoParticipacaoPublicaController::class);
+Route::get('/plano/detalhes/{id}', [PlanoController::class, 'details'])->name('plano.details');
+Route::get('/plano/download_doc/{id}', [PlanoController::class, 'downloadPlano'])->name('plano.downloadPlano');
+Route::get('/plano/download/{id}/{documentoId}', [PlanoController::class, 'download'])->name('plano.download');
 // ROTAS PROTEGIDAS (Apenas para usuários autenticados)
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -78,14 +83,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/planos', [PlanoController::class, 'all'])->name('plano.all');
     Route::get('/planos/show/{id}', [PlanoController::class, 'show'])->name('plano.show');
     Route::get('/planos/edit/{id}', [PlanoController::class, 'edit'])->name('plano.edit');
-    Route::post('/plano/update/{id}', [PlanoController::class, 'update'])->name('plano.update');
-    Route::get('/plano/download/{id}/{documentoId}', [PlanoController::class, 'download'])->name('plano.download');
-    Route::get('/plano/download_doc/{id}', [PlanoController::class, 'downloadPlano'])->name('plano.downloadPlano');
-
-
-  
-  //  Route::get('/consultas_publicas/reg', [ConsultaPublicaController::class, 'public_create'])->name('consultas_publicas.public_create');
-
-
-
+    Route::put('/planos/update/{id}', [PlanoController::class, 'update'])->name('plano.update');
 });

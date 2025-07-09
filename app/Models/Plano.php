@@ -18,5 +18,13 @@ class Plano extends Model
         'densidade_habitantes',
         'descricao_plano',
         'id_tipo_plano',
+        'id_distrito',
+        'objectivos',
+        'data_elaboracao'
     ];
+
+    public function consultasPublicas()
+    {
+        return $this->hasMany(\App\Models\ConsultaPublica::class, 'id_plano', 'id_plano');
+    }
 }

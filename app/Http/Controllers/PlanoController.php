@@ -161,38 +161,57 @@ class PlanoController extends Controller
         // Return the view with the list of planos
         return view('plano.list', ['planos' => $planos]);
     }
+
     public function show($id)
     {
-        // Retrieve a specific plano by ID
-        //$plano = Plano::findOrFail($id);
+        return $this->getDetails($id, false);
+    }
+    private function getDetails($id, $public = false)
+    {
         $plano = DB::table('planos')
-        ->join('tipo_planos', 'planos.id_tipo_plano', '=', 'tipo_planos.id_tipo_plano')
-        ->join('distritos', 'planos.id_distrito', '=', 'distritos.id_distrito')
-        ->select('*')
-        ->where('planos.id_plano', $id)
-        ->first();
-      //  return json_encode($plano);
-        // Check if the plano exists
+            ->join('tipo_planos', 'planos.id_tipo_plano', '=', 'tipo_planos.id_tipo_plano')
+            ->join('distritos', 'planos.id_distrito', '=', 'distritos.id_distrito')
+            ->select('*')
+            ->where('planos.id_plano', $id)
+            ->first();
+
         if (!$plano) {
             return redirect()->route('plano.all')->with('error', 'Plano não encontrado.');
         }
 
-
-
         $documentos = DB::table('documentos')
-        ->join('planos', 'documentos.id_plano', '=', 'planos.id_plano')
-        ->select('documentos.*')
-        ->where('documentos.id_plano', $id)
-        ->get();
+            ->join('planos', 'documentos.id_plano', '=', 'planos.id_plano')
+            ->select('documentos.*')
+            ->where('documentos.id_plano', $id)
+            ->get();
 
         $consultas = DB::table('consultas_publicas')
-        ->join('bairros', 'consultas_publicas.id_bairro', '=', 'bairros.id_bairro')
-        ->select('*')
-        ->where('consultas_publicas.id_plano', $id)
-        ->get();
+            ->join('bairros', 'consultas_publicas.id_bairro', '=', 'bairros.id_bairro')
+            ->select('*')
+            ->where('consultas_publicas.id_plano', $id)
+            ->get();
 
-        // Return the view with the plano details
-        return view('plano.show', ['plano' => $plano, 'consultas' => $consultas, 'documentos' => $documentos, 'count'=>$consultas->count()]);  
+        // Se não estiver logado, retorna a view 'plano.details'
+
+
+        // Se estiver logado, retorna a view 'plano.show'
+        if ($public) {
+            return view('plano.detalhes', [
+                'plano' => $plano,
+                'consultas' => $consultas,
+                'documentos' => $documentos,
+                'count' => $consultas->count()
+            ]);
+        }
+        return view('plano.show', [
+            'plano' => $plano,
+            'consultas' => $consultas,
+            'documentos' => $documentos,
+            'count' => $consultas->count()
+        ]);
+    }
+    public function details($id){
+        return $this->getDetails($id, true);
     }
     public function edit($id)
     {
