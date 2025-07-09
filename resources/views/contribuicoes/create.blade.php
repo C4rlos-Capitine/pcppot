@@ -184,7 +184,7 @@
                 <form class="formulario" action="{{ route('contribuicoes.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <fieldset>
-                        <h3>Cadastro de Contribuições</h3>
+                        <h3>Registo de sugestão/Reclamação</h3>
                         <p>Preencha os campos abaixo para registrar uma contribuição.</p>
 
                         <div class="row g-3 align-items-center">

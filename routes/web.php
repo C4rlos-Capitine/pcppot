@@ -79,6 +79,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/planos/show/{id}', [PlanoController::class, 'show'])->name('plano.show');
     Route::get('/planos/edit/{id}', [PlanoController::class, 'edit'])->name('plano.edit');
     Route::post('/plano/update/{id}', [PlanoController::class, 'update'])->name('plano.update');
+    Route::get('/plano/download/{id}/{documentoId}', [PlanoController::class, 'download'])->name('plano.download');
+    Route::get('/plano/download_doc/{id}', [PlanoController::class, 'downloadPlano'])->name('plano.downloadPlano');
 
 
   

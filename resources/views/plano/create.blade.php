@@ -124,8 +124,13 @@
                         <label for="descricao_plano" class="form-label">Descrição do Plano</label>
                         <textarea class="form-control" id="descricao_plano" name="descricao_plano" maxlength="255" rows="3" required></textarea>
                     </div>
+                    <input type="hidden" name="nome_documento" value="Documento do Plano">
                     <div class="row g-3 align-items-center">
                         <p>Documentos do Plano</p>
+                        <div class="col-auto">
+                            <label for="documento_plano" class="form-label">Documento do Plano (PDF, DOC)</label>
+                            <input type="file" class="form-control" id="doc_plano" name="doc_plano" accept=".pdf, .doc, .docx" required>
+                        </div>
                         <div class="col-auto">
                             <label for="documento_plano" class="form-label">Minuta do Plano (PDF, DOC)</label>
                             <input type="file" class="form-control" id="minuta" name="minuta" accept=".pdf, .doc, .docx" required>

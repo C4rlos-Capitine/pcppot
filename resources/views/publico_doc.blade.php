@@ -220,8 +220,8 @@ body {
                         <strong>Data de Fim:</strong> {{ $plano->data_fim }}<br>
                         <strong>Área Abrangida:</strong> {{ $plano->area_abrangida }} km²<br>
                         <strong>Objectivos:</strong> {{ $plano->objectivos }}
-                        <strong><a href="#">Baixar o documento</a></strong></br>
-                        <strong><a href="{{ route('consultas_publicas.public_create', ['id_plano' => $plano->id_plano]) }}">Participar da auscultação</a></strong>
+                        <strong><a href="{{ url('/plano/download_doc/' . $plano->id_plano) }}">Baixar o documento</a></strong></br>
+                        <strong><a href="{{ route('consultas_publicas.public_create', ['id_plano' => $plano->id_plano]) }}">Consultar plano</a></strong>
                     </label>
                 </div>
             </div>

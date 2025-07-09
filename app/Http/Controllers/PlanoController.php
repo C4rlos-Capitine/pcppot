@@ -41,6 +41,7 @@ class PlanoController extends Controller
             'objectivos' => 'required|string|max:255',
             'id_distrito' => 'required|exists:distritos,id_distrito',
             // Validação dos documentos
+            'doc_plano' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'minuta' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'mapa' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'relatorio_tecnico' => 'required|file|mimes:pdf,doc,docx|max:2048',
@@ -57,13 +58,18 @@ class PlanoController extends Controller
             ['file' => $request->file('mapa'), 'documentoplano_id' => 2, 'nome_documento' => 'Mapas Geoespaciais'],
             ['file' => $request->file('relatorio_tecnico'), 'documentoplano_id' => 3, 'nome_documento' => 'Relatório Técnico Preliminar'],
             ['file' => $request->file('impacto_ambiental'), 'documentoplano_id' => 4, 'nome_documento' => 'Estudos de Impacto Ambiental e Social'],
+            ['file' => $request->file('doc_plano'), 'documentoplano_id' => 5, 'nome_documento' => 'Documento do Plano'],
         ];
     Log::info('Documentos:', $documentos);
     
         foreach ($documentos as $doc) {
             // Salvar o arquivo no diretório 'uploads/documentos'
             $path = $doc['file']->store('uploads/documentos', 'public');
-    
+            if($doc['documentoplano_id']==5){
+                // Atualizar o caminho do documento no plano
+                Plano::where('id_plano', $plano->id_plano)
+                    ->update(['path' => $path, 'nome_documento' => $doc['nome_documento']]);
+            }
             // Salvar os dados do documento no banco de dados
             \App\Models\Documento::create([
                 'documentoplano_id' => $doc['documentoplano_id'],
@@ -72,12 +78,56 @@ class PlanoController extends Controller
                 'path' => $path,
             ]);
         }
+
+        
+
+
     
         return redirect()->route('plano.create')->with('success', 'Plano e documentos criados com sucesso!');
         } catch (\Exception $e) {
             Log::error('Error logging request data: ' . $e->getMessage());
         }
        
+    }
+
+    public function download($id, $documentoId)
+    {
+        // Retrieve the document from the database
+        $documento = \App\Models\Documento::findOrFail($documentoId);
+
+        // Check if the document belongs to the specified plano
+        if ($documento->id_plano != $id) {
+            return redirect()->route('plano.all')->with('error', 'Documento não encontrado para este plano.');
+        }
+
+        // Pega a extensão do arquivo salvo
+        $extensao = pathinfo($documento->path, PATHINFO_EXTENSION);
+
+        // Monta o nome do arquivo para download com extensão
+        $nomeDownload = $documento->nome_documento . '.' . $extensao;
+
+        // Return the file as a download response
+        return Storage::disk('public')->download($documento->path, $nomeDownload);
+    }
+
+    public function downloadPlano($id)
+    {
+        // Retrieve the plano from the database
+        $plano = Plano::findOrFail($id);
+
+        // Check if the plano has a document to download
+        if (!$plano->path) {
+            return redirect()->route('plano.all')->with('error', 'Nenhum documento encontrado para este plano.');
+        }
+
+        // Pega a extensão do arquivo salvo
+        $extensao = pathinfo($plano->path, PATHINFO_EXTENSION);
+
+        // Monta o nome do arquivo para download com extensão
+        $nomeDownload = $plano->nome_documento . '.' . $extensao;
+
+        // Return the file as a download response
+        return Storage::disk('public')->download($plano->path, $nomeDownload);
     }
 
     

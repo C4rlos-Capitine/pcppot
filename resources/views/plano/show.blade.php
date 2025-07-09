@@ -104,7 +104,7 @@
                                 
                                 <td>{{ $documento->created_at }}</td>
                                 <td>
-                                    <a href="" class="btn btn-primary">Baixar</a>
+                                <a href="{{ url('/plano/download/' . $documento->id_plano . '/' . $documento->id_documento) }}" class="btn btn-primary">Baixar</a>
                                 </td>
                             </tr>
                         @endforeach
