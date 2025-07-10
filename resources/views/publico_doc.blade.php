@@ -8,10 +8,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{asset('jquery-3.7.0.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
   <link href="{{asset('css/form.css')}}" rel="stylesheet" />
         <script src="{{asset('auth.js')}}"></script>
@@ -25,9 +21,17 @@ body {
 			font-family: Arial, sans-serif;
 		}
 
+        nav{
+            background-color: white !important
+        }
+        ..navbar-light{
+            background-color: white !important;
+        }
+
+	
 		header {
 			margin-right: 20px;
-			background-color: #E8F5E9;
+			background-color: white;
 			padding-right: 0.7rem;
 			text-align: initial;
 			width: 100%;
@@ -112,8 +116,8 @@ body {
         }
 
         .post-section {
-            margin: 2rem auto;
-            width: 80%;
+            margin: 0.5rem auto;
+            width: 90%;
         }
         .post {
             background-color: #ECEFF1;
@@ -214,17 +218,18 @@ body {
                     <p class="card-text">
                         <strong>Data de Início:</strong> {{ $plano->data_inicio }}<br>
                         <strong>Data de Fim:</strong> {{ $plano->data_fim }}<br>
-                        <strong>Consultas {{ $plano->consultas_publicas_count }}</strong></br>
+                        <strong><i class="bi bi-chat-dots"></i>Consultas {{ $plano->consultas_publicas_count }}</strong></br>
                         <a class="btn btn-primary" id="{{ $plano->id_plano }}" href="{{ route('plano.details', $plano->id_plano) }}">Detalhes</a>
                     </p>
                     <a href="{{ url('/plano/download_doc/' . $plano->id_plano) }}" class="card-link">Baixar o documento</a>
                     <a href="{{ route('consultas_publicas.public_create', ['id_plano' => $plano->id_plano]) }}" class="card-link">Consultar plano</a>
-                    <a href="javascript:void(0);" onclick="carregarDocumentos({{ $plano->id_plano }})" class="card-link">Ver documentos</a>
+
                 </div>
             </div>
         @endforeach
 
 	</main>
+    @include('footer')
     <div class="modal fade bd-example-modal-lg" id="modal-edit-senha" tabindex="1" style="z-index:9999" role="dialog" aria-labelledby="myLargeModalLabel" padding="15px" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -263,7 +268,7 @@ body {
 </div>
 
 
-@include('footer')
+
 </body>
 <script>
     function show_Form(){

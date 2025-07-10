@@ -26,7 +26,7 @@
 		
 		header {
 			margin-right: 20px;
-			background-color: #E8F5E9;
+			background-color: white;
 			padding-right: 0.7rem;
 			text-align: initial;
 			width: 100%;

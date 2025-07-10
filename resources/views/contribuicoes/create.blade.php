@@ -9,10 +9,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{asset('jquery-3.7.0.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
    <link href="{{asset('css/form.css')}}" rel="stylesheet" />
         <script src="{{asset('auth.js')}}"></script>
@@ -29,7 +25,7 @@
 
 		header {
 			margin-right: 20px;
-			background-color: #E8F5E9;
+			background-color: white !important;
 		padding-right: 0.7rem;
 			text-align: initial;
 			width: 100%;
@@ -179,12 +175,12 @@
                         </ul>
                     </div>
                 @endif
-
+                <div class="section-div">  <h3>Registo de sugestão/Reclamação</h3></div>
                 <!-- Formulário para Contribuições -->
                 <form class="formulario" action="{{ route('contribuicoes.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <fieldset>
-                        <h3>Registo de sugestão/Reclamação</h3>
+                      
                         <p>Preencha os campos abaixo para registrar uma contribuição.</p>
 
                         <div class="row g-3 align-items-center">

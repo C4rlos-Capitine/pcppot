@@ -19,10 +19,7 @@
         <link href="{{asset('fontawsome/css/all.min.css')}}" rel="stylesheet">
         <link href="{{asset('fontawsome/css/fontawesome.min.css')}}" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
-<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
+
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 <link href="{{asset('css/form.css')}}" rel="stylesheet" />
         <!-- Scripts -->
@@ -45,7 +42,7 @@ body {
 
 		header {
 			margin-right: 20px;
-			background-color: #E8F5E9;
+			background-color: white !important;
 			padding-right: 0.7rem;
 			text-align: initial;
 			width: 100%;
@@ -257,7 +254,8 @@ body {
 <body>
         @include('header_public')
 	<main>
-        <h3>Visualização do Plano</h3>
+
+        	<div class="section-div"><h4>Detalhes do plano</h4></div>
 
         <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'London')">Dados do Plano</button>
