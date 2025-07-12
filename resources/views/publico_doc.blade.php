@@ -56,6 +56,7 @@ body {
 			height: 100%;
 			padding: 30px;
 			text-align: center;
+            background-color:rgb(237, 243, 239);
 		}
 
 		.row {

@@ -52,6 +52,7 @@
 			height: 100%;
 			/* padding: 30px; */
 			text-align: center;
+	
 		}
 		.main-img{
 			position: relative;
