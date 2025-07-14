@@ -25,14 +25,26 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rota para a página principal após login
 Route::get('/main', [AuthController::class, 'main'])->name('main')->middleware('auth');
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/stats', function () {
+     $count_planos = \App\Models\Plano::where('id_tipo_plano', 1)->count();
+        $count_programas = \App\Models\Plano::where('id_tipo_plano', 2)->count();
+        $count_projectos = \App\Models\Plano::where('id_tipo_plano', 3)->count();
+        $cout_propostas = \App\Models\PropostaComunitaria::count();
+
+        return view('estatisticas', compact('count_planos', 'count_programas', 'count_projectos', 'cout_propostas'));
 });
 
 
 Route::get('/docs', function () {
     // Busca todos os planos e já traz o total de consultas públicas relacionadas a cada um
-    $planos = \App\Models\Plano::withCount('consultasPublicas')->get();
+    //$planos = \App\Models\Plano::withCount('consultasPublicas')->get();
+
+    $planos = \App\Models\Plano::with(['distritos'])->withCount('consultasPublicas')->get();
     return view('publico_doc', ['planos' => $planos]);
 });
 

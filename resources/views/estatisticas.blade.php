@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,10 +10,21 @@
 <script type="text/javascript" src="{{asset('jquery-3.7.0.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
+<link rel="stylesheet" type="text/css" href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
   <link href="{{asset('css/form.css')}}" rel="stylesheet" />
         <script src="{{asset('auth.js')}}"></script>
+        
 <title>PCPPO</title>
 	<style>
+  canvas{
+    margin: 20px;
+  }
+
 body {
 			justify-content: center;
 			margin: 0;
@@ -24,7 +36,7 @@ body {
         nav{
             background-color: white !important
         }
-        ..navbar-light{
+        .navbar-light{
             background-color: white !important;
         }
 
@@ -202,57 +214,100 @@ body {
         .imagem{
             cursor: pointer;
         }
+        .row{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 	</style>
 </head>
 <body>
         @include('header_public')
 	<main>
 
-		<div class="section-div"><h4>Projectos/Planos/Programas para Auscultação</h4></div>
-            <section class="post-section">
-            @foreach ($planos as $plano)
-            @php
-                $hoje = \Carbon\Carbon::now()->toDateString();
-                $estaNoTempo = ($plano->data_inicio <= $hoje && $plano->data_fim >= $hoje);
-                 
-                    if ($plano->data_inicio > $hoje) {
-                        $status = 'futuro'; // ainda não começou
-                        $estaNoTempo = false;
-                    } elseif ($plano->data_fim < $hoje) {
-                        $status = 'passado'; // já terminou
-                        $estaNoTempo = false;
-                    } else {
-                        $status = 'presente'; // dentro do tempo
-                        $estaNoTempo = true;
-                    }
-            @endphp
-                <div class="card mb-3" style="width: 22rem; display: inline-block; margin: 10px; vertical-align: top;">
+		<div class="section-div"><h4>Estatisticas</h4></div>
+        <section id="minimal-statistics">
+            <div class="row">
+            <div class="col-xl-3 col-sm-6 col-12"> 
+                <div class="card">
+                <div class="card-content">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $plano->nome_plano }}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted"></h6>
-                    <p class="card-text">
-             <strong>Área abrangida:</strong> {{ $plano->distritos->nome_distrito ?? '-' }} ({{$plano->area_abrangida}}km2)<br>
-                <strong>Data de Início:</strong> {{ $plano->data_inicio }}<br>
-                <strong>Data de Fim:</strong> {{ $plano->data_fim }}<br>
-                <strong>Status:</strong>
-                @if($status == 'presente')
-                    <span class="badge bg-success">No tempo</span>
-                @elseif($status == 'futuro')
-                    <span class="badge bg-warning text-dark">Ainda não começou</span>
-                @else
-                    <span class="badge bg-danger">Fora do tempo</span>
-                @endif
-                <br>
-                <strong><i class="bi bi-chat-dots"></i>Consultas {{ $plano->consultas_publicas_count }}</strong></br>
-                <a class="btn btn-primary" id="{{ $plano->id_plano }}" href="{{ route('plano.details', $plano->id_plano) }}">Detalhes</a>
-            </p>
-            <a href="{{ url('/plano/download_doc/' . $plano->id_plano) }}" class="card-link">Baixar o documento</a>
-            @if($estaNoTempo)
-                <a href="{{ route('consultas_publicas.public_create', ['id_plano' => $plano->id_plano]) }}" class="card-link">Consultar plano</a>
-            @endif</div>
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                        <i class="icon-pencil primary font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                        <h3>{{$count_planos}}</h3>
+                        <span>Planos</span>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-            @endforeach
-            </section>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12"> 
+                <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                        <i class="icon-pencil primary font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                        <h3>{{$count_programas}}</h3>
+                        <span>Programas</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="media-body text-left">
+                        <h3 class="danger">{{$count_projectos}}</h3>
+                        <span>Projectos</span>
+                        </div>
+                        <div class="align-self-center">
+                        <i class="icon-rocket danger font-large-2 float-right"></i>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                        <i class="icon-speech warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                        <h3>{{$cout_propostas}}</h3>
+                        <span>Propostas Comunitarias</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-md-6">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="myChart2"></canvas>
+                </div>
+        </section>
 
 	</main>
     @include('footer')
@@ -296,6 +351,57 @@ body {
 
 
 </body>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+    const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: ['Planos', 'Programas', 'Projectos', 'Propostas Comunitarias'],
+      datasets: [{
+        label: '# Gráficos',
+        data: [{{$count_planos}}, {{$count_programas}}, {{$count_projectos}}, {{$cout_propostas}}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
 <script>
     function show_Form(){
         $('#modal-edit-senha').modal('show');

@@ -27,4 +27,10 @@ class Plano extends Model
     {
         return $this->hasMany(\App\Models\ConsultaPublica::class, 'id_plano', 'id_plano');
     }
+
+
+    public function distritos()
+    {
+        return $this->belongsTo(\App\Models\Distrito::class, 'id_distrito', 'id_distrito');
+    }
 }

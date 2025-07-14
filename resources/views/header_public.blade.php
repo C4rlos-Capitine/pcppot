@@ -55,11 +55,14 @@
 		<li class="nav-item">
 			<a class="nav-link {{ Request::is('propostas_comunitarias/create') ? 'nav-link-active' : '' }}" href="{{ url('/propostas_comunitarias/create') }}">Propostas Comunitárias</a>
 		</li>
+        <li class="nav-item">
+			<a class="nav-link {{ Request::is('stats') ? 'nav-link-active' : '' }}" href="{{ url('/stats') }}">Estatisticas</a>
+		</li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+          <!--  <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            </form>-->
         </div>
     </nav>
     <h1>Plataforma de Consulta Pública para Planos de Ordenamento Teritorial</h1>
