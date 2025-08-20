@@ -12,150 +12,10 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
         <link href="{{asset('css/form.css')}}" rel="stylesheet" />
+           <link href="{{asset('css/form_screen.css')}}" rel="stylesheet" />
         <script src="{{asset('auth.js')}}"></script>
 	<title>PCPPO</title>
-	<style>
-		body {
-			justify-content: center;
-			margin: 0;
-			width: 100%;
-			/*height: 100%;*/
-			font-family: Arial, sans-serif;
-		}
-
-		header {
-			margin-right: 20px;
-			background-color: white !important;
-		padding-right: 0.7rem;
-			text-align: initial;
-			width: 100%;
-			display: flex;
-			flex-direction: row;
-		}
-        nav{
-            background-color: white;
-        }
-		h1{
-			font-size: 16px;
-			color: #2E7D32;
-			margin: 20px;
-		}
-
-		header a {
-			color: black;
-			text-decoration: none;
-			margin: 0 15px;
-			font-size: 18px;
-		}
-		main{
-			margin-top: 3.0rem;
-			justify-content: center;
-			height: 100%;
-			padding: 30px;
-			text-align: center;
-            background-color:rgb(237, 243, 239);
-		}
-		.btn{
-			height: fit-content;
-			margin-top: 10px;
-			margin-left: 50rem;
-			background-color: #4CAF50 ;
-			margin-left: auto;
-		}
-
-		.row {
-			display: flex;
-			justify-content: center;
-			align-items: flex-start;
-			gap: 20px;
-			margin-top: 20px;
-		}
-
-		.card {
-			width: 300px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			border: 1px solid #ddd;
-			border-radius: 10px;
-			overflow: hidden;
-			background: #fff;
-			text-align: center;
-			padding: 0;
-
-		}
-
-		.card img {
-			width: 100%;
-			height: 150px;
-			object-fit: cover;
-			padding: 0;
-		}
-
-		.card p {
-			margin: 10px 0;
-			padding: 10px;
-			font-size: 16px;
-			color: #333;
-		}
-		footer {
-			background-color: black;
-			color: white;
-			text-align: center;
-			padding: 20px;
-			position: relative;
-			bottom: 0;
-			width: 100%;
-			height: 10rem;
-			p{
-				color: #4CAF50;
-			}
-		}
-		.info-section{
-			/*background-color: #FFF176;*/
-			margin: auto;
-			width: 90%;
-			padding: 2.2rem;
-			border-radius: 20px;
-			border: 2px solid #E8F5E9;
-			p{
-				color: #2E7D32;
-				text-align: justify;
-			}
-		}
-		.sticky {
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
-        .sticky + .content {
-        	padding-top: 60px;
-        }
-        @media (max-width: 720px) {
-		  body {
-		    
-		  }
-		  .row{
-		  	flex-direction: row;
-		  }
-		}
-
-		form{
-			display: flex;
-			flex-direction: column;
-		}
-
-		#login_button{
-			width: auto;
-			margin-left: 10px;
-		}
-		.img_card{
-			width: 100%;
-			border-start-end-radius: 20px 20px;
-			margin-left: 0;
-		}
-
-	</style>
+	
 </head>
 <body>
    @include('header_public')
@@ -165,7 +25,7 @@
                 <!-- Mensagem de Sucesso -->
                 @if (session('success'))
                     <div class="alert alert-success">
-                        {{ session('success') }}
+                         {!! session('success') !!}
                     </div>
                 @endif
 

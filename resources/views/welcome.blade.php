@@ -23,28 +23,12 @@
 			/*height: 100%;*/
 			font-family: Arial, sans-serif;
 		}
-		
-		header {
-			margin-right: 20px;
-			background-color: white;
-			padding-right: 0.7rem;
-			text-align: initial;
-			width: 100%;
-			display: flex;
-			flex-direction: row;
-		}
 		h1{
 			font-size: 16px;
 			color: #2E7D32;
 			margin: 20px;
 		}
 
-		header a {
-			color: black;
-			text-decoration: none;
-			margin: 0 15px;
-			font-size: 18px;
-		}
 		main{
 			margin-top: 4rem;
 			justify-content: center;

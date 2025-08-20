@@ -32,6 +32,7 @@ class ContribuicaoController extends Controller
         return view('contribuicoes.show', compact('contribuicao'));
     }
 
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -45,12 +46,27 @@ class ContribuicaoController extends Controller
             'anexo' => 'nullable|file|max:2048',
         ]);
 
+        // Calcula a próxima sequência
+        $maxSequencia = \App\Models\Contribuicao::max('sequencia');
+        $sequencia = $maxSequencia ? $maxSequencia + 1 : 1;
+
+        // Monta o código
+        $codigo = $sequencia . 'cn';
+
+        // Adiciona ao array validado
+        $validated['sequencia'] = $sequencia;
+        $validated['codigo'] = $codigo;
+
         if ($request->hasFile('anexo')) {
             $validated['anexo'] = $request->file('anexo')->store('uploads/contribuicoes', 'public');
         }
 
         Contribuicao::create($validated);
+        
+        $contribuicao = \App\Models\Contribuicao::create($validated);
+        $pdfLink = route('relatorio.contribuicao', ['id_contribuicao' => $contribuicao->id_contribuicao]);
+        $successMsg = 'Contribuição registrada com sucesso! <a href="' . $pdfLink . '" class="btn btn-success" target="_blank">Baixar relatório PDF</a>';
 
-        return redirect()->route('contribuicoes.create')->with('success', 'Contribuição registrada com sucesso!');
+        return redirect()->route('contribuicoes.create')->with('success', $successMsg);
     }
 }

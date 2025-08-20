@@ -16,6 +16,11 @@ class PropostaComunitaria extends Model
         'tipo_intervencao',
         'localizacao',
         'documento_apoio',
+        'sequencia',
+        'codigo',
+        'status',
+        'data_resposta',
+        'resposta',
     ];
 
     public function bairro()

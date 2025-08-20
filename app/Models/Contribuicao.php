@@ -17,6 +17,11 @@ class Contribuicao extends Model
         'email',
         'contacto_telefonico',
         'anexo',
+                'sequencia',
+        'codigo',
+        'status',
+        'data_resposta',
+        'resposta',
     ];
 
     // Relacionamento com a tabela planos

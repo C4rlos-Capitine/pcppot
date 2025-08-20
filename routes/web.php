@@ -10,6 +10,8 @@ use App\Http\Controllers\ConsultaPublicaController;
 use App\Http\Controllers\ContribuicaoController;
 use App\Http\Controllers\PropostaComunitariaController;
 use App\Http\Controllers\EventoParticipacaoPublicaController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\RelatorioController;
 
 // ROTAS DO PORTAL DO MUNÍCIPE (Públicas)
 use App\Http\Controllers\AuthController;
@@ -48,13 +50,20 @@ Route::get('/docs', function () {
     return view('publico_doc', ['planos' => $planos]);
 });
 
+Route::get('/relatorios/consulta/{id_consulta}', [RelatorioController::class, 'gerarPdf'])->name('relatorio.consulta');
+Route::get('/relatorios/proposta/{id_proposta}', [RelatorioController::class, 'gerarRelatorioProposta'])->name('relatorio.proposta');
+Route::get('/relatorios/evento/{id_evento}', [RelatorioController::class, 'gerarRelatorioEvento'])->name('relatorio.evento');
+Route::get('/relatorios/contribuicao/{id_contribuicao}', [RelatorioController::class, 'gerarRelatorioContribuicao'])->name('relatorio.contribuicao');
+
+
+
 Route::get('/docs/plano/{id_plano}', function ($id) {
     $documentos = \App\Models\Documento::where('id_plano', $id)->get();
     return response()->json($documentos);
 });
 
 Route::get('/consultas_publicas/reg/{id_plano}', [ConsultaPublicaController::class, 'public_create'])->name('consultas_publicas.public_create');
-  Route::resource('consultas_publicas', ConsultaPublicaController::class);
+Route::resource('consultas_publicas', ConsultaPublicaController::class);
 Route::get('/docs/download/{id_documento}', function ($id_documento) {
     $documento = \App\Models\Documento::findOrFail($id_documento);
     $filePath = $documento->path;

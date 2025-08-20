@@ -31,6 +31,7 @@ class EventoParticipacaoPublicaController extends Controller
     /**
      * Store a newly created resource in storage.
         */
+   
     public function store(Request $request)
     {
         // Validação dos dados
@@ -47,6 +48,17 @@ class EventoParticipacaoPublicaController extends Controller
             'anexo' => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048',
         ]);
 
+        // Calcula a próxima sequência
+        $maxSequencia = \App\Models\EventoParticipacaoPublica::max('sequencia');
+        $sequencia = $maxSequencia ? $maxSequencia + 1 : 1;
+
+        // Monta o código
+        $codigo = $sequencia . 'ev';
+
+        // Adiciona ao array validado
+        $validated['sequencia'] = $sequencia;
+        $validated['codigo'] = $codigo;
+
         // Upload do arquivo (se fornecido)
         if ($request->hasFile('anexo')) {
             $validated['anexo'] = $request->file('anexo')->store('uploads/eventos', 'public');
@@ -57,9 +69,7 @@ class EventoParticipacaoPublicaController extends Controller
 
         // Redirecionar com mensagem de sucesso
         return redirect()->route('eventos_participacao_publica.index')->with('success', 'Evento cadastrado com sucesso!');
-    }
-
-    /**
+    }    /**
      * Display the specified resource.
      */
     public function show(string $id)

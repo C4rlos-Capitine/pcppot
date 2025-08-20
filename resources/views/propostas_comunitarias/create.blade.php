@@ -29,20 +29,13 @@
 			color: #2E7D32;
 			margin: 20px;
 		}
-
-		header a {
-			color: black;
-			text-decoration: none;
-			margin: 0 15px;
-			font-size: 18px;
-		}
 		main{
 			margin-top: 3.0rem;
 			justify-content: center;
 			height: 100%;
 			padding: 30px;
 			text-align: center;
-                        background-color:rgb(237, 243, 239);
+               
 		}
 		.btn{
 			height: fit-content;
@@ -156,7 +149,7 @@
                 <!-- Mensagem de Sucesso -->
                 @if (session('success'))
                     <div class="alert alert-success">
-                        {{ session('success') }}
+                        {!! session('success') !!}
                     </div>
                 @endif
 

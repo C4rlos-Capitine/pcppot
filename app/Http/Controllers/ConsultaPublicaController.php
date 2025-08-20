@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ConsultaPublica;
 use App\Models\Bairro;
 use App\Models\Plano;
+use App\Mail\ConfirmConsulta;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -47,7 +49,6 @@ class ConsultaPublicaController extends Controller
 
     public function store(Request $request)
     {
-       // return $request->all();
         $validated = $request->validate([
             'nome_completo' => 'required|string|max:255',
             'data_nascimento' => 'required|date|before:-18 years',
@@ -64,10 +65,13 @@ class ConsultaPublicaController extends Controller
             $validated['ficheiro_upload'] = $request->file('ficheiro_upload')->store('uploads/consultas', 'public');
         }
 
-        ConsultaPublica::create($validated);
+        $consulta = ConsultaPublica::create($validated);
+       // Mail::to($validated['email'])->send(new ConfirmConsulta());
+
+        $pdfLink = route('relatorio.consulta', ['id_consulta' => $consulta->id_consulta]);
+        $successMsg = 'Consulta pública registrada com sucesso! <a href="' . $pdfLink . '" class="btn btn-success" target="_blank">Baixar relatório PDF</a>';
 
         return redirect()->route('consultas_publicas.public_create', ['id_plano' => $validated['id_plano']])
-            ->with('success', 'Consulta pública registrada com sucesso!');
-
+            ->with('success', $successMsg);
     }
 }

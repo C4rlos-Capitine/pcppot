@@ -46,13 +46,33 @@ class PropostaComunitariaController extends Controller
             'documento_apoio' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
+        // Calcula a próxima sequência
+        $maxSequencia = \App\Models\PropostaComunitaria::max('sequencia');
+        $sequencia = $maxSequencia ? $maxSequencia + 1 : 1;
+
+        // Monta o código
+        $codigo = $sequencia . 'co';
+
+        // Prepara os dados
+        $dados = $request->all();
+        $dados['sequencia'] = $sequencia;
+        $dados['codigo'] = $codigo;
+        // status será 'pendente' pelo default da migration
+
+        // Se houver documento de apoio, salva o arquivo
+        if ($request->hasFile('documento_apoio')) {
+            $dados['documento_apoio'] = $request->file('documento_apoio')->store('uploads/propostas', 'public');
+        }
+
         // Store the proposal
-        \App\Models\PropostaComunitaria::create($request->all());
+        \App\Models\PropostaComunitaria::create($dados);
 
-        // Redirect to the proposals index with a success message
-        return redirect()->route('propostas_comunitarias.create')->with('success', 'Proposta comunitária criada com sucesso!');
+        $proposta = \App\Models\PropostaComunitaria::create($dados);
+        $pdfLink = route('relatorio.proposta', ['id_proposta' => $proposta->id_proposta]);
+        $successMsg = 'Proposta comunitária criada com sucesso! <a href="' . $pdfLink . '" class="btn btn-success" target="_blank">Baixar relatório PDF</a>';
+
+return redirect()->route('propostas_comunitarias.create')->with('success', $successMsg);
     }
-
     /**
      * Display the specified resource.
      */

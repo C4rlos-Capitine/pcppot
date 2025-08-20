@@ -19,6 +19,11 @@ class EventoParticipacaoPublica extends Model
         'contacto',
         'link_inscricao',
         'anexo',
+                'sequencia',
+        'codigo',
+        'status',
+        'data_resposta',
+        'resposta',
     ];
 
     public function plano()
