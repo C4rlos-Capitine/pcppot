@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Contribuicao;
 use Illuminate\Http\Request;
+use App\Mail\ConfirmContribuicao;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Plano; // Assuming you have a Plano model
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,7 +68,7 @@ class ContribuicaoController extends Controller
         
         $contribuicao = \App\Models\Contribuicao::create($validated);
         $pdfLink = route('relatorio.contribuicao', ['id_contribuicao' => $contribuicao->id_contribuicao]);
-         Mail::to($validated['email'])->send(new ConfirmConsulta($contribuicao));
+         Mail::to($validated['email'])->send(new ConfirmContribuicao($contribuicao));
         $successMsg = 'Contribuição registrada com sucesso! <a href="' . $pdfLink . '" class="btn btn-success" target="_blank">Baixar relatório PDF</a>';
 
         return redirect()->route('contribuicoes.create')->with('success', $successMsg);
