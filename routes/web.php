@@ -82,6 +82,7 @@ Route::resource('eventos_participacao_publica', EventoParticipacaoPublicaControl
 Route::get('/plano/detalhes/{id}', [PlanoController::class, 'details'])->name('plano.details');
 Route::get('/plano/download_doc/{id}', [PlanoController::class, 'downloadPlano'])->name('plano.downloadPlano');
 Route::get('/plano/download/{id}/{documentoId}', [PlanoController::class, 'download'])->name('plano.download');
+
 // ROTAS PROTEGIDAS (Apenas para usuários autenticados)
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -105,4 +106,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/planos/show/{id}', [PlanoController::class, 'show'])->name('plano.show');
     Route::get('/planos/edit/{id}', [PlanoController::class, 'edit'])->name('plano.edit');
     Route::put('/planos/update/{id}', [PlanoController::class, 'update'])->name('plano.update');
+
+    Route::post('contribuicoes/feedback/{id}', [ContribuicaoController::class, 'update'])->name('contribuicoes.feedback');
 });

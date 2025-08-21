@@ -9,22 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ConfirmConsulta extends Mailable
+class ConfirmContribuicao extends Mailable
 {
     use Queueable, SerializesModels;
-    public $consulta;
+    public $contribuicao;
     /**
      * Create a new message instance.
      */
-    public function __construct($consulta)
+    public function __construct($contribuicao)
     {
-        $this->consulta = $consulta;
+        $this->contribuicao = $contribuicao;
     }
-
     public function build()
     {
-        return $this->view('mails.confirm_consulta')
-                    ->with(['consulta' => $this->consulta]);
+        return $this->view('mails.confirm_contribuicao')
+                    ->with(['contribuicao' => $this->contribuicao]);
     }
 
     /**
@@ -33,7 +32,7 @@ class ConfirmConsulta extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Confirmção da Consulta',
+            subject: 'Confirmação da Contribuição',
         );
     }
 
@@ -43,7 +42,7 @@ class ConfirmConsulta extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.confirm_consulta',
+            view: 'mails.confirm_contribuicao',
         );
     }
 

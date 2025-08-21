@@ -61,12 +61,30 @@ class ContribuicaoController extends Controller
             $validated['anexo'] = $request->file('anexo')->store('uploads/contribuicoes', 'public');
         }
 
-        Contribuicao::create($validated);
+
+        //Contribuicao::create($validated);
         
         $contribuicao = \App\Models\Contribuicao::create($validated);
         $pdfLink = route('relatorio.contribuicao', ['id_contribuicao' => $contribuicao->id_contribuicao]);
+         Mail::to($validated['email'])->send(new ConfirmConsulta($contribuicao));
         $successMsg = 'Contribuição registrada com sucesso! <a href="' . $pdfLink . '" class="btn btn-success" target="_blank">Baixar relatório PDF</a>';
 
         return redirect()->route('contribuicoes.create')->with('success', $successMsg);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $contribuicao = Contribuicao::findOrFail($id);
+
+        $validated = $request->validate([
+            'status' => 'required|string|in:pendente,em_análise,resolvida,rejeitada',
+            'resposta' => 'nullable|string|max:500',
+        ]);
+
+        $validated['data_resposta'] = date('Y-m-d H:i:s'); // Set current date and time for response
+
+        $contribuicao->update($validated);
+
+        return redirect()->route('contribuicoes.show', $id)->with('success', 'Contribuição atualizada com sucesso!');
     }
 }

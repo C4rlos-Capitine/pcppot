@@ -66,7 +66,7 @@ class ConsultaPublicaController extends Controller
         }
 
         $consulta = ConsultaPublica::create($validated);
-       // Mail::to($validated['email'])->send(new ConfirmConsulta());
+        Mail::to($validated['email'])->send(new ConfirmConsulta($consulta));
 
         $pdfLink = route('relatorio.consulta', ['id_consulta' => $consulta->id_consulta]);
         $successMsg = 'Consulta pública registrada com sucesso! <a href="' . $pdfLink . '" class="btn btn-success" target="_blank">Baixar relatório PDF</a>';
