@@ -2,14 +2,6 @@
 <html lang="en">
     @include('head')
     <style>
-.row {
-  display: flex;
-  flex-direction: row; /* ← garante que os filhos fiquem em linha */
-  justify-content: flex-start; /* ou center, se quiser centralizar */
-  align-items: flex-start;
-  gap: 20px;
-  margin-top: 20px;
-}
 
     </style>
     <body>
@@ -19,24 +11,23 @@
             @include('nav')
                 <!-- Page content-->
             <div class="container-fluid">
-            <div class="row">
-              <div class="dados">
-                <label>Dados</label>
+            <div class="row mb-3">
+            <div class="col-md-3 dados">
                 <ul>
                     <li>Pendentes: {{ $pendenteCount }}</li>
                     <li>Em Análise: {{ $emAnaliseCount }}</li>
                     <li>Rejeitadas: {{ $rejeitadaCount }}</li>
                     <li>Resolvidas: {{ $resolvidaCount }}</li>
                 </ul>
-                </div>
-                <div class="dados">
-                    <ul>
-                        <li>Sugestão de melhoria: {{ $sugestaoCount }}</li>
-                        <li>Reclamação: {{ $reclamacaoCount }}</li>
-                        <li>Pedido de eclarecimento: {{ $pedidoEsclarecimentoCount }}</li>
-                    </ul>
-                </div>
             </div>
+            <div class="col-md-3 dados">
+                <ul>
+                    <li>Sugestão de melhoria: {{ $sugestaoCount }}</li>
+                    <li>Reclamação: {{ $reclamacaoCount }}</li>
+                    <li>Pedido de eclarecimento: {{ $pedidoEsclarecimentoCount }}</li>
+                </ul>
+            </div>
+        </div>
        
             <fieldset>
                 <label>Contribuições</label>
