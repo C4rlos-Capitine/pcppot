@@ -29,7 +29,7 @@ body {
 			justify-content: center;
 			margin: 0;
 			width: 100%;
-			/*height: 100%;*/
+			height: 1720px;
 			font-family: Arial, sans-serif;
 		}
 
@@ -210,85 +210,99 @@ body {
 	<main>
 
 		<div class="section-div"><h4>Estatisticas</h4></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px;">
+            <h4>Dados do Ano de {{date('Y')}}</h4>
+            <select>
+                <option value="2024" selected>2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+            </select>
+        </div>
         <section id="minimal-statistics">
             <div class="row">
-            <div class="col-xl-3 col-sm-6 col-12"> 
-                <div class="card">
-                <div class="card-content">
-                    <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="align-self-center">
-                        <i class="icon-pencil primary font-large-2 float-left"></i>
-                        </div>
-                        <div class="media-body text-right">
-                        <h3>{{$count_planos}}</h3>
-                        <span>Planos</span>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12"> 
-                <div class="card">
-                <div class="card-content">
-                    <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="align-self-center">
-                        <i class="icon-pencil primary font-large-2 float-left"></i>
-                        </div>
-                        <div class="media-body text-right">
-                        <h3>{{$count_programas}}</h3>
-                        <span>Programas</span>
+                <div class="col-xl-3 col-sm-6 col-12"> 
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="icon-pencil primary font-large-2 float-left"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3>{{$count_planos}}</h3>
+                                        <span>Planos</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    </div>
                 </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card">
-                <div class="card-content">
-                    <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="media-body text-left">
-                        <h3 class="danger">{{$count_projectos}}</h3>
-                        <span>Projectos</span>
-                        </div>
-                        <div class="align-self-center">
-                        <i class="icon-rocket danger font-large-2 float-right"></i>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card">
-                <div class="card-content">
-                    <div class="card-body">
-                    <div class="media d-flex">
-                        <div class="align-self-center">
-                        <i class="icon-speech warning font-large-2 float-left"></i>
-                        </div>
-                        <div class="media-body text-right">
-                        <h3>{{$cout_propostas}}</h3>
-                        <span>Propostas Comunitarias</span>
+                <div class="col-xl-3 col-sm-6 col-12"> 
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="icon-pencil primary font-large-2 float-left"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3>{{$count_programas}}</h3>
+                                        <span>Programas</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="media-body text-left">
+                                        <h3 class="danger">{{$count_projectos}}</h3>
+                                        <span>Projectos</span>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="icon-rocket danger font-large-2 float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="media d-flex">
+                                    <div class="align-self-center">
+                                        <i class="icon-speech warning font-large-2 float-left"></i>
+                                    </div>
+                                    <div class="media-body text-right">
+                                        <h3>{{$cout_propostas}}</h3>
+                                        <span>Propostas Comunitarias</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
             </div>
         
             <div class="row">
-                <div class="col-md-6">
-                    <canvas id="myChart"></canvas>
+                <div class="col-md-4">
+                    <canvas id="myChart3"></canvas>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <canvas id="myChart2"></canvas>
                 </div>
+                <div class="col-md-4">
+                    <canvas id="myChart4"></canvas>
+                </div>
+            </div>
         </section>
 
 	</main>
@@ -340,6 +354,7 @@ body {
 <script>
   const ctx = document.getElementById('myChart');
 
+
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -379,6 +394,46 @@ body {
       }
     }
   });
+
+const ctx_propostas = document.getElementById('myChart3');
+    new Chart(ctx_propostas, {
+        type: 'bar',
+        data: {
+        labels: ['Equipamento Social', 'Infraestrutura', 'Espaço Público'],
+        datasets: [{
+            label: '# de Propostas',
+            data: [{{$equipamentoSocialCount}}, {{$infraestruturaCount}}, {{$espacoPublicoCount}}],
+            borderWidth: 1
+        }]
+        },
+        options: {
+        scales: {
+            y: {
+            beginAtZero: true
+            }
+        }
+        }
+    });
+
+    const ctx_contribuicoes = document.getElementById('myChart4');
+    new Chart(ctx_contribuicoes, {  
+        type: 'bar',
+        data: {
+        labels: ['Sugestão', 'Reclamação', 'Pedido de Esclarecimento'],
+        datasets: [{
+            label: '# de Contribuições',
+            data: [{{$sugestaoCount}}, {{$reclamacaoCount}}, {{$pedidoEsclarecimentoCount}}],
+            borderWidth: 1
+        }]
+        },
+        options: {
+        scales: {
+            y: {
+            beginAtZero: true
+            }
+        }
+        }
+    });
 </script>
 
 

@@ -12,6 +12,8 @@ use App\Http\Controllers\PropostaComunitariaController;
 use App\Http\Controllers\EventoParticipacaoPublicaController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RelatorioController;
+use Illuminate\Support\Facades\DB;
+
 
 // ROTAS DO PORTAL DO MUNÍCIPE (Públicas)
 use App\Http\Controllers\AuthController;
@@ -38,7 +40,43 @@ Route::get('/stats', function () {
         $count_projectos = \App\Models\Plano::where('id_tipo_plano', 3)->count();
         $cout_propostas = \App\Models\PropostaComunitaria::count();
 
-        return view('estatisticas', compact('count_planos', 'count_programas', 'count_projectos', 'cout_propostas'));
+        $equipamentoSocialCount = DB::table('propostas_comunitarias')
+            ->where('tipo_intervencao', 'equipamento_social')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
+        $infraestruturaCount = DB::table('propostas_comunitarias')
+            ->where('tipo_intervencao', 'infraestrutura')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
+        $espacoPublicoCount = DB::table('propostas_comunitarias')
+            ->where('tipo_intervencao', 'espaco_publico')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
+
+        $sugestaoCount = DB::table('contribuicoes')
+            ->where('tipo_contribuicao', 'sugestao')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
+        $reclamacaoCount = DB::table('contribuicoes')
+            ->where('tipo_contribuicao', 'reclamacao')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
+        $pedidoEsclarecimentoCount = DB::table('contribuicoes')
+            ->where('tipo_contribuicao', 'pedido_esclarecime')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
+
+
+
+
+
+        return view('estatisticas', compact('count_planos', 'count_programas', 'count_projectos', 'cout_propostas', 'equipamentoSocialCount', 'infraestruturaCount', 'espacoPublicoCount', 'sugestaoCount', 'reclamacaoCount', 'pedidoEsclarecimentoCount'));
 });
 
 

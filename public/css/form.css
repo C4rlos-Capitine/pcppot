@@ -7,6 +7,17 @@ fieldset {
     border-radius: 2px 2px 2px 2px;
     padding: 20px !important;
 }
+
+.dados{
+       background-color: #edeee7;
+    
+    gap: 10px;
+    margin: 20px !important;
+    border: 1 px solid #ccc;	
+    border-radius: 2px 2px 2px 2px;
+    padding: 20px !important; 
+    flex-direction: row !important;
+}
 .btn{
     margin-top: 10px;
     background-color: green !important;

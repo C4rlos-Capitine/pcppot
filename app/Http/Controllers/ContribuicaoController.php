@@ -12,13 +12,53 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 
 class ContribuicaoController extends Controller
 {
     public function index()
     {
+
+
+//$ano = 2024;
+
+$pendenteCount = DB::table('contribuicoes')
+    ->where('status', 'Pendente')
+    //->whereYear('created_at', $ano)
+    ->count();
+
+$emAnaliseCount = DB::table('contribuicoes')
+    ->where('status', 'Em_analise')
+   // ->whereYear('created_at', $ano)
+    ->count();
+
+$rejeitadaCount = DB::table('contribuicoes')
+    ->where('status', 'Rejeitada')
+    //->whereYear('created_at', $ano)
+    ->count();
+$resolvidaCount = DB::table('contribuicoes')
+    ->where('status', 'Resolvida')->count();
+
+
+        $sugestaoCount = DB::table('contribuicoes')
+            ->where('tipo_contribuicao', 'sugestao')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
+        $reclamacaoCount = DB::table('contribuicoes')
+            ->where('tipo_contribuicao', 'reclamacao')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
+        $pedidoEsclarecimentoCount = DB::table('contribuicoes')
+            ->where('tipo_contribuicao', 'pedido_esclarecime')
+            ->whereYear('created_at', date('Y'))
+            ->count();
+
         $contribuicoes = Contribuicao::all();
-        return view('contribuicoes.index', compact('contribuicoes'));
+        return view('contribuicoes.index', compact('contribuicoes', 'pendenteCount', 'emAnaliseCount', 'rejeitadaCount', 'resolvidaCount', 'sugestaoCount', 'reclamacaoCount', 'pedidoEsclarecimentoCount'));
     }
 
     public function create()
@@ -86,6 +126,8 @@ class ContribuicaoController extends Controller
         $validated['data_resposta'] = date('Y-m-d H:i:s'); // Set current date and time for response
 
         $contribuicao->update($validated);
+Log::info('Contribuição updated:', $contribuicao->toArray());
+        Mail::to($contribuicao->email)->send(new \App\Mail\FeedbackContribuicao($contribuicao));
 
         return redirect()->route('contribuicoes.show', $id)->with('success', 'Contribuição atualizada com sucesso!');
     }
