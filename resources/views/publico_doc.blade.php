@@ -219,11 +219,11 @@ body {
                 <strong>Data de Fim:</strong> {{ $plano->data_fim }}<br>
                 <strong>Status:</strong>
                 @if($status == 'presente')
-                    <span class="badge bg-success">No tempo</span>
+                    <span class="badge bg-success">Em Vigor</span>
                 @elseif($status == 'futuro')
-                    <span class="badge bg-warning text-dark">Ainda não começou</span>
+                    <span class="badge bg-warning text-dark">Brevemente</span>
                 @else
-                    <span class="badge bg-danger">Fora do tempo</span>
+                    <span class="badge bg-danger">Passou</span>
                 @endif
                 <br>
                 <strong><i class="bi bi-chat-dots"></i>Consultas {{ $plano->consultas_publicas_count }}</strong></br>

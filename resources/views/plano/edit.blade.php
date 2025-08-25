@@ -39,7 +39,7 @@
                             <!-- Campo para o nome do plano -->
                             <div class="col-auto">
                                 <label for="id_tipo_plano" class="form-label">Tipo</label>
-                                <select class="form-select" id="tipo_plano_programa_projeto" name="tipo_plano_programa_projeto" required>
+                                <select class="form-select" id="tipo_plano_programa_projeto" name="tipo_plano_programa_projeto">
                                     <option value="plano" {{ $plano->tipo_plano_programa_projeto == 'plano' ? 'selected' : '' }}>Plano</option>
                                     <option value="programa" {{ $plano->tipo_plano_programa_projeto == 'programa' ? 'selected' : '' }}>Programa</option>
                                     <option value="projeto" {{ $plano->tipo_plano_programa_projeto == 'projeto' ? 'selected' : '' }}>Projeto</option>
@@ -47,11 +47,11 @@
                             </div>
                             <div class="col-auto">
                                 <label for="nome_plano" class="form-label">Nome do Plano</label>
-                                <input type="text" class="form-control" id="nome_plano" name="nome_plano" maxlength="100" value="{{ $plano->nome_plano }}" required>
+                                <input type="text" class="form-control" id="nome_plano" name="nome_plano" maxlength="100" value="{{ $plano->nome_plano }}">
                             </div>
                             <div class="col-auto">
                                 <label for="data_elaboracao" class="form-label">Data de elaboração</label>
-                                <input type="date" class="form-control" id="data_elaboracao" name="data_elaboracao" value="{{ $plano->data_elaboracao }}" required>
+                                <input type="date" class="form-control" id="data_elaboracao" name="data_elaboracao" value="{{ $plano->data_elaboracao }}">
                             </div>
 
                             <div class="col-auto">
@@ -67,42 +67,42 @@
                             <!-- Campo para a data de início -->
                             <div class="col-auto">
                                 <label for="data_inicio" class="form-label">Data de Início</label>
-                                <input type="date" class="form-control" id="data_inicio" name="data_inicio" value="{{ $plano->data_inicio }}" required>
+                                <input type="date" class="form-control" id="data_inicio" name="data_inicio" value="{{ $plano->data_inicio }}">
                             </div>
 
                             <!-- Campo para a data de fim -->
                             <div class="col-auto">
                                 <label for="data_fim" class="form-label">Data de Fim</label>
-                                <input type="date" class="form-control" id="data_fim" name="data_fim" value="{{ $plano->data_fim }}" required>
+                                <input type="date" class="form-control" id="data_fim" name="data_fim" value="{{ $plano->data_fim }}">
                             </div>
                         </div>
 
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
                                 <label for="area_abrangida" class="form-label">Área Abrangida (km²)</label>
-                                <input type="number" step="0.01" class="form-control" id="area_abrangida" name="area_abrangida" value="{{ $plano->area_abrangida }}" required>
+                                <input type="number" step="0.01" class="form-control" id="area_abrangida" name="area_abrangida" value="{{ $plano->area_abrangida }}">
                             </div>
                             <div class="col-auto">
                                 <label for="latitude" class="form-label">Latitude</label>
-                                <input type="number" step="0.00000001" class="form-control" id="latitude" name="latitude" value="{{ $plano->latitude }}" required>
+                                <input type="number" step="0.00000001" class="form-control" id="latitude" name="latitude" value="{{ $plano->latitude }}">
                             </div>
                             <div class="col-auto">
                                 <label for="longitude" class="form-label">Longitude</label>
-                                <input type="number" step="0.00000001" class="form-control" id="longitude" name="longitude" value="{{ $plano->longitude }}" required>
+                                <input type="number" step="0.00000001" class="form-control" id="longitude" name="longitude" value="{{ $plano->longitude }}">
                             </div>
                             <div class="col-auto">
                                 <label for="densidade_habitantes" class="form-label">Densidade de Habitantes por km²</label>
-                                <input type="number" step="0.01" class="form-control" id="densidade_habitantes" name="densidade_habitantes" value="{{ $plano->densidade_habitantes }}" required>
+                                <input type="number" step="0.01" class="form-control" id="densidade_habitantes" name="densidade_habitantes" value="{{ $plano->densidade_habitantes }}">
                             </div>
                             <div class="col-auto">
                                 <label for="objectivos" class="form-label">Objetivos</label>
-                                <input type="text" class="form-control" id="objectivos" name="objectivos" value="{{ $plano->objectivos }}" required>
+                                <input type="text" class="form-control" id="objectivos" name="objectivos" value="{{ $plano->objectivos }}">
                             </div>
                         </div>
 
                         <div class="col-auto">
                             <label for="id_distrito" class="form-label">Distrito</label>
-                            <select class="form-select" id="id_distrito" name="id_distrito" required>
+                            <select class="form-select" id="id_distrito" name="id_distrito">
                                 @foreach ($distritos as $distrito)
                                     <option value="{{ $distrito->id_distrito }}" {{ $plano->id_distrito == $distrito->id_distrito ? 'selected' : '' }}>
                                         {{ $distrito->nome_distrito }}
@@ -113,7 +113,7 @@
 
                         <div class="col-auto">
                             <label for="descricao_plano" class="form-label">Descrição do Plano</label>
-                            <textarea class="form-control" id="descricao_plano" name="descricao_plano" maxlength="255" rows="3" required>{{ $plano->descricao_plano }}</textarea>
+                            <textarea class="form-control" id="descricao_plano" name="descricao_plano" maxlength="255" rows="3">{{ $plano->descricao_plano }}</textarea>
                         </div>
 
                         <div class="row g-3 align-items-center">

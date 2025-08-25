@@ -41,17 +41,17 @@
 		.main-img{
 			position: relative;
 			width: 100%;
-			height: 22rem;
+			height: 18rem;
 			background-color: violet;
 			padding: 2rem;
 			z-index: -999;
 			margin-bottom: 2rem;
-			background-image: url("{{asset('mapa.png')}}");
+			background-image: url(main-img.png);
 			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
 		}
-		.main-img h3{
+		.main-img h2{
 			width: 50%;
 			top: 5%;
 			position: relative;
@@ -60,8 +60,7 @@
 			font-weight: 700;
 			color: #0b8e12;
 			
-		}
-		.btn{
+		}		.btn{
 			height: fit-content;
 			margin-top: 10px;
 			margin-left: 50rem;

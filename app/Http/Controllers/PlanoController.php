@@ -230,6 +230,7 @@ class PlanoController extends Controller
             'nome_plano' => 'required|string|max:100',
             'data_inicio' => 'required|date',
             'data_fim' => 'required|date|after_or_equal:data_inicio',
+            'data_elaboracao' => 'required|date',
             'area_abrangida' => 'required|numeric|min:0',
             'latitude' => 'required|numeric|between:-90,90',
             'longitude' => 'required|numeric|between:-180,180',
