@@ -120,7 +120,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="feedback">Feedback</label>
-                                <textarea class="form-control" id="feedback" name="feedback" rows="4" required></textarea>
+                                <textarea class="form-control" id="feedback" name="resposta" rows="4" required></textarea>
                                 <small class="form-text text-muted">Escreva seu feedback sobre esta contribuição.</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Guardar o feedback</button>
