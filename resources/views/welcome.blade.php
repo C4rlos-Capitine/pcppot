@@ -184,7 +184,7 @@
 		<div class="row">
 			<div class="card">
 				<img  class ="img_card"src="people.jpg"  alt="Imagem 1">
-				<p><a href="{{url('/contribuicoes/create')}}">Sugestões/Reclamações</a></p>
+				<p><a href="#" onclick="show_consulta()">Sugestões/Reclamações</a></p>
 			</div>
 			<div class="card">
 				<img class ="img_card" src="people2.jpg" alt="Imagem 2">
@@ -202,6 +202,31 @@
 
 	</main>
 @include('footer')
+
+	<div class="modal" id="modal-consulta" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title">Consulta do estado da reclamação</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<div class="form-group">
+                <label>Escreva o código</label>
+                <input required="true" type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo">
+            </div>
+			<div id="resultados" style="margin-top: 20px;">
+
+			</div>
+		</div>
+		<div class="modal-footer">
+			<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+			<button type="button" id="consultar_estado" class="btn btn-primary">Consultar</button>
+		</div>
+		</div>
+	</div>
+	</div>
+
 	<div class="modal fade bd-example-modal-lg" id="modal-edit-senha" tabindex="1" style="z-index:9999" role="dialog" aria-labelledby="myLargeModalLabel" padding="15px" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -247,6 +272,10 @@
 	    function show_Form(){
         $('.modal').modal('show');
     }
+
+	function show_consulta(){
+		$('#modal-consulta').modal('show');
+	}
     window.onscroll = function() {myFunction()};
     
     var navbar = document.querySelector("header");
@@ -288,6 +317,39 @@
                 }
             });
         });
+
+		$('#consultar_estado').on('click', function () {
+			const codigo = $('#codigo').val();
+			if (!codigo) {
+				alert('Por favor, insira um código válido.');
+				return;
+			}
+
+			$.ajax({
+				url: '/contribuicoes/consultar/' + codigo,
+				type: 'GET',
+				success: function (response) {
+					let resultadoHtml = '<h5>Estado da Contribuição</h5>';
+					resultadoHtml += '<p><strong>Código:</strong> ' + response.codigo + '</p>';
+					resultadoHtml += '<p><strong>Tipo:</strong> ' + response.tipo_contribuicao + '</p>';
+					resultadoHtml += '<p><strong>Assunto:</strong> ' + response.assunto + '</p>';
+					resultadoHtml += '<p><strong>Descrição:</strong> ' + response.descricao + '</p>';
+					resultadoHtml += '<p><strong>Status:</strong> ' + response.status + '</p>';
+					if (response.resposta) {
+						resultadoHtml += '<p><strong>Resposta:</strong> ' + response.resposta + '</p>';
+						resultadoHtml += '<p><strong>Data da Resposta:</strong> ' + response.data_resposta + '</p>';
+					}
+					$('#resultados').html(resultadoHtml);
+				},
+				error: function (xhr) {
+					if (xhr.status === 404) {
+						$('#resultados').html('<p style="color: red;">Contribuição não encontrada. Verifique o código e tente novamente.</p>');
+					} else {
+						$('#resultados').html('<p style="color: red;">Ocorreu um erro ao consultar a contribuição. Tente novamente mais tarde.</p>');
+					}
+				}
+			});
+		});
     });
 </script>
 </html>

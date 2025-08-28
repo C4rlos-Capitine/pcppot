@@ -120,7 +120,8 @@ Route::resource('eventos_participacao_publica', EventoParticipacaoPublicaControl
 Route::get('/plano/detalhes/{id}', [PlanoController::class, 'details'])->name('plano.details');
 Route::get('/plano/download_doc/{id}', [PlanoController::class, 'downloadPlano'])->name('plano.downloadPlano');
 Route::get('/plano/download/{id}/{documentoId}', [PlanoController::class, 'download'])->name('plano.download');
-
+Route::get('/contribuicoes/consultar_estado', [ContribuicaoController::class, 'consultar'])->name('contribuicoes.consultar');
+Route::get('/contribuicoes/consultar/{codigo}', [ContribuicaoController::class, 'consultar_state'])->name('contribuicoes.consultar_state');
 // ROTAS PROTEGIDAS (Apenas para usuários autenticados)
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {

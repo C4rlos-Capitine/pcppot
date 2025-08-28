@@ -126,9 +126,26 @@ $resolvidaCount = DB::table('contribuicoes')
         $validated['data_resposta'] = date('Y-m-d H:i:s'); // Set current date and time for response
 
         $contribuicao->update($validated);
-Log::info('Contribuição updated:', $contribuicao->toArray());
+        Log::info('Contribuição updated:', $contribuicao->toArray());
         Mail::to($contribuicao->email)->send(new \App\Mail\FeedbackContribuicao($contribuicao));
 
         return redirect()->route('contribuicoes.show', $id)->with('success', 'Contribuição atualizada com sucesso!');
+    }
+
+    public function consultar()
+    {
+        return view('contribuicoes.show');
+    }
+
+    public function consultar_state($codigo)
+    {
+        $contribuicao = Contribuicao::where('codigo', $codigo)->first();
+
+        if (!$contribuicao) {
+            return redirect()->back()->withErrors(['codigo' => 'Código de contribuição inválido.']);
+        }
+        return response()->json($contribuicao);
+       // return view('contribuicoes.show', compact('contribuicao'));
+
     }
 }
