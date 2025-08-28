@@ -334,6 +334,7 @@
 					resultadoHtml += '<p><strong>Tipo:</strong> ' + response.tipo_contribuicao + '</p>';
 					resultadoHtml += '<p><strong>Assunto:</strong> ' + response.assunto + '</p>';
 					resultadoHtml += '<p><strong>Descrição:</strong> ' + response.mensagem + '</p>';
+								resultadoHtml += '<p><strong>Resposta:</strong><textarea> ' + response.mensagem + '</textarea></p>';
 					resultadoHtml += '<p><strong>Status:</strong> ' + response.status + '</p>';
 					if (response.resposta) {
 						resultadoHtml += '<p><strong>Resposta:</strong> ' + response.resposta + '</p>';
